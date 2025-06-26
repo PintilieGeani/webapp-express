@@ -28,7 +28,12 @@ const show = (req, res) => {
     connection.query(sql, [id], (error, results) => {
         if(error) {
             console.log(error)
-        }else {
+        }
+        if(results.length === 0) {
+            res.status(404).json({
+                error: "Movie not found"
+            })
+        } else {
             const movies = res.data
 
             res.status(200).json(

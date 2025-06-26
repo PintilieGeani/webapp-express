@@ -1,5 +1,7 @@
 import express from "express";
 import router from "./router/movies.js";
+import errorHandler from "./middleware/errorsHandler.js";
+import notFound from "./middleware/notfound.js";
 
 const app = express()
 const port = 3000
@@ -15,6 +17,9 @@ app.get("/" , (req, res) => {
 });
 
 app.use("/movies", router)
+
+app.use(errorHandler)
+app.use(notFound)
 
 app.listen(port, () => {
 console.log(`Server in ascolto su ${port}`)
