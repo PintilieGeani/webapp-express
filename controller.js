@@ -8,13 +8,21 @@ const index = (req, res) => {
         if(error) {
             console.log(error)
         }else {
-            const movies = res.data
+
+          const movies = results.map((curMovie) => {
+                return {
+                    ...curMovie,
+                    image: `http://localhost:3000/img/${curMovie.image}`
+                }
+            })
 
             res.status(200).json(
                 {
-                    data: results
+                    data: movies
                 }
             );
+
+            
         }
     });
 }
